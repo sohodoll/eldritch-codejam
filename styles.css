@@ -1,0 +1,62 @@
+img {
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0px 0px 7px rgb(255, 255, 255);
+}
+
+html {
+  padding: 0;
+  margin: 0;
+  background-image: url('assets/home.png');
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-around;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.upper,
+.middle,
+.bottom {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+}
+
+.ancient {
+  width: 200px;
+}
+
+.difficulty {
+  width: 95px;
+  background-color: rgba(235, 146, 111, 0.315);
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  box-shadow: 0px 0px 7px rgb(255, 255, 255);
+}
+
+.difficulty:hover,
+.deck:hover,
+.ancient:hover {
+  cursor: pointer;
+}
+
+.shuffle{
+  background-color: rgba(127, 255, 212, 0.329);
+}
+
+.card-filler {
+  width: 200px;
+  box-shadow: 0px 0px 5px rgb(255, 255, 255);
+  height: 294px;
+  background-color: rgba(187, 214, 204, 0.2);
+  border-radius: 10px;
+}
+
