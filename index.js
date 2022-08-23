@@ -1,0 +1,193 @@
+import greenCards from './data/mythicCards/green/index.js';
+import blueCards from './data/mythicCards/blue/index.js';
+import brownCards from './data/mythicCards/brown/index.js';
+import ancients from './data/ancients.js'
+
+const cardBox = document.querySelector('.card-filler');
+const cardImg = document.createElement('img');
+const shuffleButton = document.querySelector('.shuffle');
+const deckBox = document.querySelector('.deck');
+const ancientImage = document.querySelectorAll('.ancient');
+const difficulty = document.querySelectorAll('.complex');
+const greenCount = document.querySelector('.green');
+const brownCount = document.querySelector('.brown');
+const blueCount = document.querySelector('.blue');
+
+
+for (let i = 0; i < ancientImage.length; i++) {
+    ancientImage[i].addEventListener('click', function () {
+      ancientImage[0].classList.remove('active');
+      ancientImage[1].classList.remove('active');
+      ancientImage[2].classList.remove('active');
+      ancientImage[3].classList.remove('active');
+      ancientImage[i].classList.add('active')
+    })
+  }
+
+for (let i = 0; i < difficulty.length; i++) {
+  difficulty[i].addEventListener('click', function () {
+    difficulty[0].classList.remove('active');
+    difficulty[1].classList.remove('active');
+    difficulty[2].classList.remove('active');
+    difficulty[3].classList.remove('active');
+    difficulty[4].classList.remove('active');
+    difficulty[i].classList.add('active')
+  })
+}
+
+shuffleButton.addEventListener('click', function() {
+  shuffleButton.innerText = 'Shuffled!';
+  shuffleButton.style.color = 'white';
+})
+
+cardBox.appendChild(cardImg);
+
+//aza normal green=5, brown=9, blue=2;
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
+
+const createDecks = () => {
+
+  let greenDeck = [];
+  let brownDeck = [];
+  let blueDeck = [];
+  let stage1Deck = [];
+  let stage2Deck = [];
+  let stage3Deck = [];
+  let fullPlayDeck = [];
+
+  const getCardIndex = (n, total) => {
+    const nums = new Set();
+    while(nums.size < n) {
+      nums.add(Math.floor(Math.random() * total) + 0);
+    }
+    return nums;
+  }
+
+  getCardIndex(5, 18).forEach(element => {
+    greenDeck.push(greenCards[element]);
+  })
+
+  getCardIndex(9, 21).forEach(element => {
+    brownDeck.push(brownCards[element]);
+  })
+
+  getCardIndex(2, 12).forEach(element => {
+    blueDeck.push(blueCards[element]);
+  })
+
+  //stage 1
+
+  stage1Deck.push(greenDeck[greenDeck.length-1]);
+  greenDeck.pop();
+
+  stage1Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage1Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage1Deck.push(blueDeck[blueDeck.length-1]);
+  blueDeck.pop();
+
+  //stage 2
+
+  stage2Deck.push(greenDeck[greenDeck.length-1]);
+  greenDeck.pop();
+
+  stage2Deck.push(greenDeck[greenDeck.length-1]);
+  greenDeck.pop();
+
+  stage2Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage2Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage2Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage2Deck.push(blueDeck[blueDeck.length-1]);
+  blueDeck.pop();
+
+  //stage 3
+
+  stage3Deck.push(greenDeck[greenDeck.length-1]);
+  greenDeck.pop();
+
+  stage3Deck.push(greenDeck[greenDeck.length-1]);
+  greenDeck.pop();
+
+  stage3Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage3Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage3Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  stage3Deck.push(brownDeck[brownDeck.length-1]);
+  brownDeck.pop();
+
+  const shuffledStage1Deck = shuffle(stage1Deck);
+  const shuffledStage2Deck = shuffle(stage2Deck);
+  const shuffledStage3Deck = shuffle(stage3Deck);
+
+  fullPlayDeck = shuffledStage1Deck.concat(shuffledStage2Deck, shuffledStage3Deck);
+
+  let stage1GreenCount = 0;
+  let stage1BrownCount = 0;
+  let stage1BlueCount = 0;
+
+  console.log(fullPlayDeck);
+
+  stage1Deck.forEach(element =>{
+    if (element['color'] === 'green') {
+      stage1GreenCount = stage1GreenCount + 1;
+    } if (element['color'] === 'brown') {
+      stage1BrownCount++;
+    } if (element['color'] === 'blue') {
+      stage1BlueCount++;
+    }
+  })
+
+  greenCount.innerText = `${stage1GreenCount}`;
+  brownCount.innerText = `${stage1BrownCount}`;
+  blueCount.innerText = `${stage1BlueCount}`;
+
+  let i = 0;
+
+  const showCard = () => {
+    if (i<fullPlayDeck.length) {
+    let source = fullPlayDeck[i]['cardFace'];
+    cardImg.src = source;
+    console.log(source);
+    i = i + 1;
+    } else {
+      cardImg.src = 'https://i.pinimg.com/originals/06/82/e2/0682e26f337825b366e8e3e3e0003ad1.jpg'
+    }
+  }
+
+  deckBox.addEventListener('click', showCard);
+}
+
+shuffleButton.addEventListener('click', createDecks);
+
+
+
+
+
+
+
+
+

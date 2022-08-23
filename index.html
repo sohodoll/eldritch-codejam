@@ -10,7 +10,7 @@
 <body>
 <div class="upper">
   <div class="first-ancient">
-    <img class="ancient" src="assets/Ancients/Azathoth.png">
+    <img class="ancient active" src="assets/Ancients/Azathoth.png">
   </div>
   <div class="second-ancient">
     <img class="ancient" src="assets/Ancients/Cthulthu.png">
@@ -23,11 +23,11 @@
   </div>
 </div>
 <div class="middle">
-  <div class="difficulty very-easy">Very Easy</div>
-  <div class="difficulty easy">Easy</div>
-  <div class="difficulty normal">Normal</div>
-  <div class="difficulty hard">Hard</div>
-  <div class="difficulty very-hard">Very Hard</div>
+  <div class="difficulty complex very-easy">Very Easy</div>
+  <div class="difficulty complex easy">Easy</div>
+  <div class="difficulty complex normal active">Normal</div>
+  <div class="difficulty complex hard">Hard</div>
+  <div class="difficulty complex very-hard">Very Hard</div>
 </div>
 <div class="bottom">
   <div class="difficulty normal shuffle">Shuffle!</div>
@@ -38,11 +38,23 @@
     <div class="card-filler"></div>
   </div>
   <div class="deck-count">
-    <div class="first-stage"></div>
-    <div class="second-stage"></div>
-    <div class="third-stage"></div>
+    <div class="stage first-stage">
+      <div class="color green">0</div>
+      <div class="color brown">0</div>
+      <div class="color blue">0</div>
+    </div>
+    <div class="stage second-stage">
+      <div class="color green">0</div>
+      <div class="color brown">0</div>
+      <div class="color blue">0</div>
+    </div>
+    <div class="stage third-stage">
+      <div class="color green">0</div>
+      <div class="color brown">0</div>
+      <div class="color blue">0</div>
+    </div>
   </div>
 </div>  
 </body>
-<script src="index.js"></script>
+<script type="module" src="index.js"></script>
 </html>
