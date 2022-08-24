@@ -9,9 +9,15 @@ const shuffleButton = document.querySelector('.shuffle');
 const deckBox = document.querySelector('.deck');
 const ancientImage = document.querySelectorAll('.ancient');
 const difficulty = document.querySelectorAll('.complex');
-const greenCount = document.querySelector('.green');
-const brownCount = document.querySelector('.brown');
-const blueCount = document.querySelector('.blue');
+const greenCount1 = document.querySelector('.green1');
+const brownCount1 = document.querySelector('.brown1');
+const blueCount1 = document.querySelector('.blue1');
+const greenCount2 = document.querySelector('.green2');
+const brownCount2 = document.querySelector('.brown2');
+const blueCount2 = document.querySelector('.blue2');
+const greenCount3 = document.querySelector('.green3');
+const brownCount3 = document.querySelector('.brown3');
+const blueCount3 = document.querySelector('.blue3');
 
 
 for (let i = 0; i < ancientImage.length; i++) {
@@ -148,6 +154,12 @@ const createDecks = () => {
   let stage1GreenCount = 0;
   let stage1BrownCount = 0;
   let stage1BlueCount = 0;
+  let stage2GreenCount = 0;
+  let stage2BrownCount = 0;
+  let stage2BlueCount = 0;
+  let stage3GreenCount = 0;
+  let stage3BrownCount = 0;
+  let stage3BlueCount = 0;
 
   console.log(fullPlayDeck);
 
@@ -161,21 +173,94 @@ const createDecks = () => {
     }
   })
 
-  greenCount.innerText = `${stage1GreenCount}`;
-  brownCount.innerText = `${stage1BrownCount}`;
-  blueCount.innerText = `${stage1BlueCount}`;
+  stage2Deck.forEach(element =>{
+    if (element['color'] === 'green') {
+      stage2GreenCount = stage2GreenCount + 1;
+    } if (element['color'] === 'brown') {
+      stage2BrownCount++;
+    } if (element['color'] === 'blue') {
+      stage2BlueCount++;
+    }
+  })
+
+  stage3Deck.forEach(element =>{
+    if (element['color'] === 'green') {
+      stage3GreenCount = stage3GreenCount + 1;
+    } if (element['color'] === 'brown') {
+      stage3BrownCount++;
+    } if (element['color'] === 'blue') {
+      stage3BlueCount++;
+    }
+  })
+
+  greenCount1.innerText = `${stage1GreenCount}`;
+  brownCount1.innerText = `${stage1BrownCount}`;
+  blueCount1.innerText = `${stage1BlueCount}`;
+  greenCount2.innerText = `${stage2GreenCount}`;
+  brownCount2.innerText = `${stage2BrownCount}`;
+  blueCount2.innerText = `${stage2BlueCount}`;
+  greenCount3.innerText = `${stage3GreenCount}`;
+  brownCount3.innerText = `${stage3BrownCount}`;
+  blueCount3.innerText = `${stage3BlueCount}`;
 
   let i = 0;
 
   const showCard = () => {
     if (i<fullPlayDeck.length) {
-    let source = fullPlayDeck[i]['cardFace'];
-    cardImg.src = source;
-    console.log(source);
-    i = i + 1;
+      let source = fullPlayDeck[i]['cardFace'];
+      cardImg.src = source;
+      console.log(source, fullPlayDeck[i]['color'], fullPlayDeck[i]['color']==='green');
+      if (stage1Deck.length>0) {
+        if (fullPlayDeck[i]['color']==='green') {
+        stage1GreenCount = stage1GreenCount - 1;
+        stage1Deck.pop();
+      } else if (fullPlayDeck[i]['color']==='brown') {
+        stage1BrownCount = stage1BrownCount - 1;
+        stage1Deck.pop();
+      } else if (fullPlayDeck[i]['color']==='blue') {
+        stage1BlueCount = stage1BlueCount - 1;
+        stage1Deck.pop();
+      }
+      }
+      if (stage1Deck.length===0&&stage2Deck.length>0&&i>3) {
+        if (fullPlayDeck[i]['color']==='green') {
+          stage2GreenCount = stage2GreenCount - 1;
+          stage2Deck.pop();
+        } else if (fullPlayDeck[i]['color']==='brown') {
+          stage2BrownCount = stage2BrownCount - 1;
+          stage2Deck.pop();
+        } else if (fullPlayDeck[i]['color']==='blue') {
+          stage2BlueCount = stage2BlueCount - 1;
+          stage2Deck.pop();
+        }
+      }
+      if (stage2Deck.length===0&&stage3Deck.length>0&&i>9) {
+        if (fullPlayDeck[i]['color']==='green') {
+          stage3GreenCount = stage3GreenCount - 1;
+          stage3Deck.pop();
+        } else if (fullPlayDeck[i]['color']==='brown') {
+          stage3BrownCount = stage3BrownCount - 1;
+          stage3Deck.pop();
+        } else if (fullPlayDeck[i]['color']==='blue') {
+          stage3BlueCount = stage3BlueCount - 1;
+          stage3Deck.pop();
+        }
+      }
+      console.log(i);
+      i = i + 1;
+
     } else {
       cardImg.src = 'https://i.pinimg.com/originals/06/82/e2/0682e26f337825b366e8e3e3e0003ad1.jpg'
     }
+    greenCount1.innerText = `${stage1GreenCount}`;
+    brownCount1.innerText = `${stage1BrownCount}`;
+    blueCount1.innerText = `${stage1BlueCount}`;
+    greenCount2.innerText = `${stage2GreenCount}`;
+    brownCount2.innerText = `${stage2BrownCount}`;
+    blueCount2.innerText = `${stage2BlueCount}`;
+    greenCount3.innerText = `${stage3GreenCount}`;
+    brownCount3.innerText = `${stage3BrownCount}`;
+    blueCount3.innerText = `${stage3BlueCount}`;
   }
 
   deckBox.addEventListener('click', showCard);
