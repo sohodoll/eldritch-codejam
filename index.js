@@ -76,7 +76,7 @@ const createDecks = () => {
     while(nums.size < n) {
       nums.add(Math.floor(Math.random() * total) + 0);
     }
-    return nums;
+    return Array.from(nums);
   }
 
   getCardIndex(5, 18).forEach(element => {
@@ -91,59 +91,90 @@ const createDecks = () => {
     blueDeck.push(blueCards[element]);
   })
 
+
+
   //stage 1
 
-  stage1Deck.push(greenDeck[greenDeck.length-1]);
-  greenDeck.pop();
+  let greenIndex = getCardIndex(1, greenDeck.length)[0];
+  let brownIndex = getCardIndex(1, brownDeck.length)[0];
+  let blueIndex = getCardIndex(1, blueDeck.length)[0];
+  
+  stage1Deck.push(greenDeck[greenIndex]);
+  greenDeck.splice(greenIndex, 1);
 
-  stage1Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  stage1Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
 
-  stage1Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  brownIndex = getCardIndex(1, brownDeck.length-1);
 
-  stage1Deck.push(blueDeck[blueDeck.length-1]);
-  blueDeck.pop();
+  stage1Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
+
+  stage1Deck.push(blueDeck[blueIndex]);
+  blueDeck.splice(blueIndex, 1);
 
   //stage 2
 
-  stage2Deck.push(greenDeck[greenDeck.length-1]);
-  greenDeck.pop();
+  greenIndex = getCardIndex(1, greenDeck.length)[0];
 
-  stage2Deck.push(greenDeck[greenDeck.length-1]);
-  greenDeck.pop();
+  stage2Deck.push(greenDeck[greenIndex]);
+  greenDeck.splice(greenIndex, 1);
 
-  stage2Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  greenIndex = getCardIndex(1, greenDeck.length)[0];
 
-  stage2Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  stage2Deck.push(greenDeck[greenIndex]);
+  greenDeck.splice(greenIndex, 1);
 
-  stage2Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  brownIndex = getCardIndex(1, brownDeck.length-1);
 
-  stage2Deck.push(blueDeck[blueDeck.length-1]);
-  blueDeck.pop();
+  stage2Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
+
+  brownIndex = getCardIndex(1, brownDeck.length-1);
+
+  stage2Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
+
+  brownIndex = getCardIndex(1, brownDeck.length-1);
+
+  stage2Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
+
+  blueIndex = getCardIndex(1, blueDeck.length)[0];
+  stage2Deck.push(blueDeck[blueIndex]);
+  blueDeck.splice(blueIndex, 1);
 
   //stage 3
 
-  stage3Deck.push(greenDeck[greenDeck.length-1]);
-  greenDeck.pop();
+  greenIndex = getCardIndex(1, greenDeck.length)[0];
 
-  stage3Deck.push(greenDeck[greenDeck.length-1]);
-  greenDeck.pop();
+  stage3Deck.push(greenDeck[greenIndex]);
+  greenDeck.splice(greenIndex, 1);
 
-  stage3Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  greenIndex = getCardIndex(1, greenDeck.length)[0];
 
-  stage3Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  stage3Deck.push(greenDeck[greenIndex]);
+  greenDeck.splice(greenIndex, 1);
 
-  stage3Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  brownIndex = getCardIndex(1, brownDeck.length-1);
 
-  stage3Deck.push(brownDeck[brownDeck.length-1]);
-  brownDeck.pop();
+  stage3Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
+
+  brownIndex = getCardIndex(1, brownDeck.length-1);
+
+  stage3Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
+
+  brownIndex = getCardIndex(1, brownDeck.length-1);
+
+  stage3Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
+
+  brownIndex = getCardIndex(1, brownDeck.length-1);
+
+  stage3Deck.push(brownDeck[brownIndex]);
+  brownDeck.splice(brownIndex, 1);
 
   const shuffledStage1Deck = shuffle(stage1Deck);
   const shuffledStage2Deck = shuffle(stage2Deck);
@@ -161,7 +192,7 @@ const createDecks = () => {
   let stage3BrownCount = 0;
   let stage3BlueCount = 0;
 
-  console.log(fullPlayDeck);
+  console.log(stage1Deck, stage2Deck, stage3Deck, fullPlayDeck);
 
   stage1Deck.forEach(element =>{
     if (element['color'] === 'green') {
@@ -209,7 +240,6 @@ const createDecks = () => {
     if (i<fullPlayDeck.length) {
       let source = fullPlayDeck[i]['cardFace'];
       cardImg.src = source;
-      console.log(source, fullPlayDeck[i]['color'], fullPlayDeck[i]['color']==='green');
       if (stage1Deck.length>0) {
         if (fullPlayDeck[i]['color']==='green') {
         stage1GreenCount = stage1GreenCount - 1;
